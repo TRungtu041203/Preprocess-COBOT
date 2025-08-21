@@ -3,6 +3,7 @@
 Test script for micro-gap cleaning using PCHIP + bone-length projection
 Based on the recovery_joints implementation for COBOT dataset
 """
+# Running command: python test_micro_gap_cleaning.py --actions_root output/actions_raw --max_gap 6 (Max_gap: maximum missing gap length to apply interpolation)
 
 import argparse
 import numpy as np
