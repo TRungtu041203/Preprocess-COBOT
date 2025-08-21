@@ -121,9 +121,9 @@ def main():
     
     print("🚀 COBOT Action Quality Cleaner (Simple)")
     print("=" * 50)
-    print(f"📁 Actions root: {args.actions_root}")
-    print(f"💾 Backup directory: {args.backup_dir}")
-    print(f"🔍 Mode: {'EXECUTE' if args.execute else 'DRY RUN'}")
+    print(f"Actions root: {args.actions_root}")
+    print(f"Backup directory: {args.backup_dir}")
+    print(f"Mode: {'EXECUTE' if args.execute else 'DRY RUN'}")
     print(f"📊 Quality thresholds:")
     print(f"   Max missing %: {args.max_missing_pct:.1f}%")
     print(f"   Max missing per frame: {args.max_missing_per_frame:.1f}")
@@ -275,3 +275,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
