@@ -125,7 +125,7 @@ def pchip_fill_fallback(X: np.ndarray, M: np.ndarray, max_gap: int) -> Tuple[np.
                     else:
                         t += 1
             except Exception:
-                continue  # Skip this joint/coordinate if PCHIP fails
+                continue  
     
     return X_out, imputed
 
@@ -134,7 +134,6 @@ def compute_target_bone_lengths_fallback(X: np.ndarray, M: np.ndarray) -> Dict[T
     """Fallback bone length computation"""
     targets = {}
     
-    # Define finger chains based on MediaPipe palm structure
     RIGHT_FINGERS = {
         "thumb":  [0, 1, 2, 3, 4],
         "index":  [5, 6, 7, 8],
@@ -322,7 +321,7 @@ def clean_micro_gaps(X: np.ndarray, max_gap: int = 5) -> Tuple[np.ndarray, Dict]
     
     pchip_time = time.time() - start_time
     imputed_ratio = imputed.sum() / imputed.size
-    print(f"  🎯 PCHIP filled {imputed.sum():,} joints ({imputed_ratio:.2%}) in {pchip_time:.3f}s")
+    print(f"PCHIP filled {imputed.sum():,} joints ({imputed_ratio:.2%}) in {pchip_time:.3f}s")
     
     # Step 3: Compute target finger bone lengths from ORIGINAL observations only
     start_time = time.time()
@@ -353,7 +352,7 @@ def clean_micro_gaps(X: np.ndarray, max_gap: int = 5) -> Tuple[np.ndarray, Dict]
     X3 = crossfade_on_reappear(X3, X.copy(), M, LEFT_HAND, K=5)
     
     crossfade_time = time.time() - start_time
-    print(f"  🎭 Cross-fade on reappearance completed in {crossfade_time:.3f}s")
+    print(f"Cross-fade on reappearance completed in {crossfade_time:.3f}s")
     
     # Step 6: Final validation - measure actual improvement
     # Count frames where we successfully filled gaps
@@ -411,13 +410,13 @@ def clean_micro_gaps(X: np.ndarray, max_gap: int = 5) -> Tuple[np.ndarray, Dict]
         }
     }
     
-    print(f"  ✅ Final valid ratio: {final_valid_ratio:.2%} (improvement: {improvement:+.2%})")
+    print(f"Final valid ratio: {final_valid_ratio:.2%} (improvement: {improvement:+.2%})")
     
     # Debug: Check if data was actually modified
     if np.array_equal(X, X3):
-        print(f"  ⚠️  WARNING: Output data is identical to input data!")
+        print(f"WARNING: Output data is identical to input data!")
     else:
-        print(f"  ✅ Data was successfully modified")
+        print(f"Data was successfully modified")
     
     return X3, stats
 
