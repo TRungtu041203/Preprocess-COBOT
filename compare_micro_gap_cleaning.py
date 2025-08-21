@@ -3,6 +3,7 @@
 Compare before/after results of micro-gap cleaning
 Shows side-by-side visualization of original vs cleaned skeleton data
 """
+# Running command: python compare_micro_gap_cleaning.py --original output/actions_raw/Help/1_1_A15_S1779_E1825.npy --cleaned cleaned_micro_gaps/Help/1_1_A15_S1779_E1825.npy --frame 20 --animate
 
 import argparse
 import numpy as np
@@ -46,7 +47,7 @@ def plot_frame_basic(ax, data: np.ndarray, frame_idx: int, title: str = ""):
         # Palm chain (right hand)
         [0, 5], [5, 9], [9, 13], [13, 17], [0, 17],
         
-        # Left hand (indices 21-41, offset +21)
+        # Left hand (indices 21-41)
         [21, 22], [22, 23], [23, 24], [24, 25], # thumb
         [26, 27], [27, 28], [28, 29],            # index
         [30, 31], [31, 32], [32, 33],            # middle
@@ -288,7 +289,6 @@ def main():
     create_comparison_plot(original_data, cleaned_data, args.frame, 
                           f"{args.original.stem} vs {args.cleaned.stem}", plot_path)
     
-    # Create animation if requested
     if args.animate:
         print(f"\n🎬 Creating comparison animation...")
         anim_path = args.output_dir / f"comparison_animation_{args.original.stem}_vs_{args.cleaned.stem}.mp4"
